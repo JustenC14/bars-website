@@ -12,6 +12,8 @@
   "author": "Justen Caldwell",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-basic-auth": "^1.2.0",
+    "request": "^2.88.0"
   }
 }

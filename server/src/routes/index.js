@@ -1,7 +1,8 @@
 const app = module.exports = require('express').Router();
 
-// Test Path
+// Test Route
 app.get('/info', (req, res, next) => {
-  console.log('Test path executed');
-  res.send("Hey, you called?\n");
+  console.log('Test route executed');
+  res.status(202).send({'message': 'Hey, you called?'});
 });
+app.use('/metadata', require('./metadata'));
