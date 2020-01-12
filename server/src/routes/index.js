@@ -6,3 +6,5 @@ app.get('/info', (req, res, next) => {
   res.status(202).send({'message': 'Hey, you called?'});
 });
 app.use('/metadata', require('./metadata'));
+app.use('/syllables', require('./syllables'));
+app.use('/pronunciation', require('./pronunciation'));

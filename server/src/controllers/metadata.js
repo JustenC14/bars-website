@@ -11,17 +11,23 @@ module.exports = methods;
  * @param {Object} body
  * @returns {Object}
  */
-methods.getMetadata = (params) => {
-  const word = params.word
-
+methods.getMetadata = (word, callback) => {
   const options = {
     method: 'GET',
     url: 'https://wordsapiv1.p.rapidapi.com/words/' + word,
+    json: true,
     headers: {
       'x-rapidapi-host': 'wordsapiv1.p.rapidapi.com',
       'x-rapidapi-key': wordsAPIKey
     }
   };
-
-  return request(options).body;
+  request(options, function (err, httpBody, body) {
+    if(err) {
+      callback(err, null, httpBody.statusCode);
+    } else if (httpBody.statusCode !== 200) {
+      callback('no data found for word: ' + word, null, httpBody.statusCode);
+    } else {
+      callback(null, body, httpBody.statusCode);
+    }
+  });
 }

@@ -15,15 +15,20 @@ app.use(basicAuth({
 
 function getUnauthorizedResponse(req) {
   return req.auth 
-    ? {'source': 'SECURITY', 'code': 'INVALID CREDENTIALS', 'additionalInfo': 'USERNAME: ' + req.auth.user + ', OR PASSWORD INVALID.'}
-    : {'source': 'SECURITY', 'code': 'NO CREDENTIALS', 'additionalInfo': 'NO BASIC AUTH CREDENTIALS PROVIDED IN REQUEST HEADER.'}
+    ? {
+        'source': 'SECURITY', 
+        'message': 'USERNAME: ' + req.auth.user + ', OR PASSWORD INVALID.'
+    } : {
+        'source': 'SECURITY', 
+        'message': 'NO BASIC AUTH CREDENTIALS PROVIDED IN REQUEST HEADER.'
+      }
 }
 // END: Authentication setup
 
 // BEGIN: API ssl and ports setup
 app.use(routes);
 
-const httpPort = 8080;
+const httpPort = 3000;
 const httpsPort = 8443;
 
 const http = require('http');
